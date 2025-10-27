@@ -207,7 +207,7 @@ function isPrime(n) {
   if (n <= 1) {
     return false;
   }
-  for (let i = 2; i <= Math.sqrt(n); i + 1) {
+  for (let i = 2; i <= Math.sqrt(n); i += 1) {
     if (n % i === 0) {
       return false;
     }
@@ -251,7 +251,7 @@ function toNumber(value, def) {
  *   0  => 0
  */
 function getCube(num) {
-  return num * num * num;
+  return num ** 3;
 }
 
 /**
@@ -270,7 +270,13 @@ function getCube(num) {
 function getFibonacciNumber(index) {
   let a = 0;
   let b = 1;
-  for (let i = 2; i <= index; i + 1) {
+  if (index === 0) {
+    return 0;
+  }
+  if (index === 1) {
+    return 1;
+  }
+  for (let i = 2; i <= index; i += 1) {
     const temp = a + b;
     a = b;
     b = temp;
@@ -307,7 +313,7 @@ function getSumToN(n) {
 function getSumOfDigits(num) {
   const str = String(num);
   let sum = 0;
-  for (let i = 0; i < str.length; i + 1) {
+  for (let i = 0; i < str.length; i += 1) {
     sum += Number.parseInt(str[i], 10);
   }
 
@@ -326,7 +332,9 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  return num % 2 === 0;
+  if (num <= 0) return false;
+  const log2 = Math.log2(num);
+  return Number.isInteger(log2);
 }
 
 /**
@@ -433,6 +441,13 @@ function getNumberValue(number) {
  * '5'      => false
  */
 function isNumber(number) {
+  if (!Number.isFinite(number)) {
+    return false;
+  }
+  if (Number.isNaN(number)) {
+    return false;
+  }
+
   return typeof number === 'number';
 }
 
@@ -569,7 +584,7 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  return x1 + x2 + x3;
+  return Number.parseFloat((x1 + x2 + x3).toFixed(6));
 }
 
 /**
@@ -585,7 +600,7 @@ function getSumOfNumbers(x1, x2, x3) {
  * 0, 5   => 5
  */
 function getMaxNumber(firstNumber, secondNumber) {
-  return firstNumber > secondNumber ? firstNumber : secondNumber;
+  return Math.max(firstNumber, secondNumber);
 }
 
 /**
@@ -632,7 +647,7 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  return Math.ceil(number / 2);
+  return Math.ceil(Math.abs(number / 2));
 }
 
 module.exports = {
